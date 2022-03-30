@@ -18,14 +18,11 @@ public class CarMovements : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //You can get Vector (directions) shorthands like this:
-        //Vector3.up etc...
-
         Vector3 carMovement = carDirection * speed * Time.deltaTime;
-
-
-        //transform.Translate(carDirection * speed * Time.deltaTime);
         transform.Translate(carMovement);
+        //transform.position = Camera.main.ScreenToWorldPoint(carMovement);
     }
 }
+
+//var pos = Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
+//transform.position = Camera.main.ScreenToWorldPoint(pos);
