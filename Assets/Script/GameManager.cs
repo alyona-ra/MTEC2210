@@ -8,12 +8,15 @@ public class GameManager : MonoBehaviour
     public Transform[] carSpawnPoints;
     private Camera mainCamera;
     public List<GameObject> cars;
+    public Color[] carColors;
 
 
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = Camera.main;
+
+        //InvokeRepeating("SpawnCar", 3, 2);
     }
 
     // Update is called once per frame
@@ -57,15 +60,42 @@ public class GameManager : MonoBehaviour
 
         int dirModifier = (index > 2) ? -1 : 1;
 
-        car.GetComponent<CarMovements>().speed = Random.Range(3.0f, 6.0f) * dirModifier;
+        float newSpeed = Random.Range(3.0f, 6.9f);
 
-        Color color = new Color(
-          Random.Range(0f, 1f),
-          Random.Range(0f, 1f),
-          Random.Range(0f, 1f)
-        );
+        int colorIndex = Mathf.FloorToInt(newSpeed) - 3;
+        car.GetComponent<CarMovements>().speed = newSpeed * dirModifier;
 
-        car.GetComponent<Renderer>().material.color = color;
+        //Color color = new Color(
+        //  Random.Range(0f, 1f),
+        //  Random.Range(0f, 1f),
+        //  Random.Range(0f, 1f)
+        //);
+
+        //car.GetComponent<Renderer>().material.color = color;
+
+       
+        //SpriteRenderer sr = car.GetComponent<SpriteRenderer>();
+
+        //Color c;
+
+        //if (newSpeed < 4.0f)
+        //{
+        //    c = carColors[0];
+        //}
+        //else if (newSpeed >= 4.0f && newSpeed < 5.0f)
+        //{
+        //    c = carColors[1];
+        //}
+        //else if (newSpeed >= 5.0f && newSpeed < 6.0f)
+        //{
+        //    c = carColors[2];
+        //}
+        //else
+        //{
+        //    c = carColors[3];
+        //}
+
+        car.GetComponent<Renderer>().material.color = carColors[colorIndex];
 
         return car;
     }

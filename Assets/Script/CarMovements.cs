@@ -22,7 +22,12 @@ public class CarMovements : MonoBehaviour
         transform.Translate(carMovement);
         //transform.position = Camera.main.ScreenToWorldPoint(carMovement);
     }
-}
 
-//var pos = Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
-//transform.position = Camera.main.ScreenToWorldPoint(pos);
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+}
