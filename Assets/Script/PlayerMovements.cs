@@ -28,4 +28,12 @@ public class PlayerMovements : MonoBehaviour
         //transform.position = new Vector3(transform.position.x + xMovement, transform.position.y + yMovement, 0);
         transform.Translate(xMovement, yMovement, 0);
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Goal")
+        {
+            Debug.Log("You Won");
+        }
+    }
 }

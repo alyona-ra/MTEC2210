@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> cars;
     public Color[] carColors;
 
+    private float timeRemaining;
+    public float spawnDelay = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -17,38 +19,54 @@ public class GameManager : MonoBehaviour
         mainCamera = Camera.main;
 
         //InvokeRepeating("SpawnCar", 3, 2);
+        timeRemaining = spawnDelay;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (timeRemaining > 0)
+        {
+            timeRemaining -= Time.deltaTime;
+        }
+        else
+        {
+            SpawnCar();
+            timeRemaining = spawnDelay;
+
+        }
+
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject car = SpawnCar();
             cars.Add(car);
         }
 
-        for (int i = 0; i < cars.Count; i++)
-        {
-            Vector2 screenPosition = mainCamera.WorldToViewportPoint(cars[i].transform.position);
-            // Debug.Log("x: " + screenPosition.x);
 
-            if (cars[i].GetComponent<CarMovements>().speed > 0)
-            {
-                if (screenPosition.x > 1)
-                {
-                    Destroy(cars[i]);
-                    cars.Remove(cars[i]);
-                }
-            } else if (cars[i].GetComponent<CarMovements>().speed < 0)
-            {
-                if (screenPosition.x < 0)
-                {
-                    Destroy(cars[i]);
-                    cars.Remove(cars[i]);
-                }
-            }
-        }
+        //destroying cars once hey off the screen
+        //for (int i = 0; i < cars.Count; i++)
+        //{
+        //    Vector2 screenPosition = mainCamera.WorldToViewportPoint(cars[i].transform.position);
+        //    // Debug.Log("x: " + screenPosition.x);
+
+        //    if (cars[i].GetComponent<CarMovements>().speed > 0)
+        //    {
+        //        if (screenPosition.x > 1)
+        //        {
+        //            Destroy(cars[i]);
+        //            cars.Remove(cars[i]);
+        //        }
+        //    } else if (cars[i].GetComponent<CarMovements>().speed < 0)
+        //    {
+        //        if (screenPosition.x < 0)
+        //        {
+        //            Destroy(cars[i]);
+        //            cars.Remove(cars[i]);
+        //        }
+        //    }
+        //}
     }
 
     GameObject SpawnCar()
