@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,11 +39,11 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameObject car = SpawnCar();
-            cars.Add(car);
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    GameObject car = SpawnCar();
+        //    cars.Add(car);
+        //}
 
 
         //destroying cars once hey off the screen
@@ -83,38 +84,16 @@ public class GameManager : MonoBehaviour
         int colorIndex = Mathf.FloorToInt(newSpeed) - 3;
         car.GetComponent<CarMovements>().speed = newSpeed * dirModifier;
 
-        //Color color = new Color(
-        //  Random.Range(0f, 1f),
-        //  Random.Range(0f, 1f),
-        //  Random.Range(0f, 1f)
-        //);
-
-        //car.GetComponent<Renderer>().material.color = color;
-
        
         //SpriteRenderer sr = car.GetComponent<SpriteRenderer>();
-
-        //Color c;
-
-        //if (newSpeed < 4.0f)
-        //{
-        //    c = carColors[0];
-        //}
-        //else if (newSpeed >= 4.0f && newSpeed < 5.0f)
-        //{
-        //    c = carColors[1];
-        //}
-        //else if (newSpeed >= 5.0f && newSpeed < 6.0f)
-        //{
-        //    c = carColors[2];
-        //}
-        //else
-        //{
-        //    c = carColors[3];
-        //}
 
         car.GetComponent<Renderer>().material.color = carColors[colorIndex];
 
         return car;
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
