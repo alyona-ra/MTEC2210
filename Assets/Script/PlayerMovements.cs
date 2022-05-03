@@ -58,11 +58,13 @@ public class PlayerMovements : MonoBehaviour
                 {
                     SetTargetPosition("Left");
                     audioSource.PlayOneShot(hopClip);
+                    GetComponent<SpriteRenderer>().flipX = false;
                 }
                 if (Input.GetKeyDown(KeyCode.D))
                 {
                     SetTargetPosition("Right");
                     audioSource.PlayOneShot(hopClip);
+                    GetComponent<SpriteRenderer>().flipX = true;
                 }
             }
             if (targetPosition != transform.position)
@@ -108,6 +110,15 @@ public class PlayerMovements : MonoBehaviour
 
         //transform.position = new Vector3(transform.position.x + xMovement, transform.position.y + yMovement, 0);
         transform.Translate(xMovement, yMovement, 0);
+
+        if (xMove == 1)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
 
         //audioSource.clip = hopClip;
         if (xMove != 0 || yMove != 0)

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public Color[] carColors;
 
     private float timeRemaining;
-    public float spawnDelay = 2;
+    public float spawnDelay = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -83,8 +83,9 @@ public class GameManager : MonoBehaviour
 
         int colorIndex = Mathf.FloorToInt(newSpeed) - 3;
         car.GetComponent<CarMovements>().speed = newSpeed * dirModifier;
+        car.GetComponent<SpriteRenderer>().flipX = (index > 2) ? false : true;
 
-       
+
         //SpriteRenderer sr = car.GetComponent<SpriteRenderer>();
 
         car.GetComponent<Renderer>().material.color = carColors[colorIndex];
